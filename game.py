@@ -2,11 +2,15 @@ class Game:
     ...
 
     def guess(self, guessNumber):
-        if guessNumber is None:
-            raise TypeError()
+        self._assert_illegal_value(guessNumber)
+
+    def _assert_illegal_value(self, guessNumber):
         if len(guessNumber) != 3:
-            raise TypeError()
+            raise TypeError('Input length must be 3')
         try:
-            guessNumber = int(guessNumber)
+            _ = int(guessNumber)
         except ValueError:
-            raise TypeError()
+            raise TypeError('Non-number mixed')
+
+        if list(guessNumber) != set(list(guessNumber)):
+            raise TypeError('Duplicated number exists')
