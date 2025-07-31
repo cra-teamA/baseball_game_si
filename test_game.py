@@ -2,14 +2,21 @@ import pytest
 
 from game import Game
 
+
 @pytest.fixture()
 def game():
     return Game()
 
-def test_exception_when_input_is_none(game):
-    with pytest.raises(TypeError):
-        game.guess(None)
 
-def test_exception_when_input_length_is_unmatched(game):
-    with pytest.raises(TypeError):
-        game.guess("12")
+def assert_illegal_input(game, inputs):
+    try:
+        game.guess(inputs)
+        pytest.fail()
+    except TypeError:
+        pass
+
+
+def test_exception_when_invalid_inputs(game):
+    assert_illegal_input(game, None)
+    assert_illegal_input(game, "12")
+
