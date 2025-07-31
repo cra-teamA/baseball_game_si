@@ -19,24 +19,22 @@ def assert_matched_number(result, solved, strikes, balls):
     assert result.strikes == strikes
     assert result.balls == balls
 
+
 @pytest.mark.parametrize("invalid_input", [None, "12", "1245", "12d", "121"])
 def test_exception_when_invalid_inputs(game, invalid_input):
     assert_illegal_input(game, invalid_input)
 
 
-def test_return_solved_result_if_matched_number(game):
-    game.question = '123'
-    assert_matched_number(game.guess("123"), True, 3, 0)
+@pytest.mark.parametrize(
+    'question,guess_number,solved,strikes,balls',
+    [
+        ('123', '123', True, 3, 0),
+        ('123', '456', False, 0, 0),
+        ('123', '124', False, 2, 0),
+        ('123', '321', False, 1, 2)
+    ]
+)
+def test_return_solved_result(game, question, guess_number, solved, strikes, balls):
+    game.question = question
+    assert_matched_number(game.guess(guess_number), solved, strikes, balls)
 
-
-def test_return_solved_result_if_unmatched_number(game):
-    game.question = '123'
-    assert_matched_number(game.guess("456"), False, 0, 0)
-
-def test_return_solved_result_if_two_strike_one_ball(game):
-    game.question = '123'
-    assert_matched_number(game.guess("124"), False, 2, 0)
-
-def test_return_solved_result_if_one_strike_two_ball(game):
-    game.question = '123'
-    assert_matched_number(game.guess("321"), False, 1, 2)
