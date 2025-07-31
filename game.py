@@ -11,8 +11,6 @@ class Game:
 
     def guess(self, guess_number):
         self._assert_illegal_value(guess_number)
-        if guess_number == self._question:
-            return GameResult(True, 3, 0)
         game_result = GameResult(False, 0, 0)
         for i in range(3):
             if guess_number[i] == self._question[i]:
