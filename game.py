@@ -13,7 +13,15 @@ class Game:
         self._assert_illegal_value(guess_number)
         if guess_number == self._question:
             return GameResult(True, 3, 0)
-        return GameResult(False, 0, 0)
+        game_result = GameResult(False, 0, 0)
+        for i in range(3):
+            if guess_number[i] == self._question[i]:
+                game_result.strikes += 1
+
+        if game_result.strikes == 3:
+            game_result.solved = True
+
+        return game_result
 
     def _assert_illegal_value(self, guess_number):
         if len(guess_number) != 3:
@@ -40,3 +48,12 @@ class GameResult:
     @property
     def balls(self):
         return self._balls
+    @solved.setter
+    def solved(self, solved):
+        self._solved = solved
+    @strikes.setter
+    def strikes(self, strikes):
+        self._strikes = strikes
+    @balls.setter
+    def balls(self, balls):
+        self._balls = balls
