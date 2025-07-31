@@ -19,4 +19,7 @@ def assert_illegal_input(game, inputs):
 def test_exception_when_invalid_inputs(game):
     assert_illegal_input(game, None)
     assert_illegal_input(game, "12")
+    assert_illegal_input(game, "1245")
+    assert_illegal_input(game, "12d")
+
 

@@ -6,3 +6,7 @@ class Game:
             raise TypeError()
         if len(guessNumber) != 3:
             raise TypeError()
+        try:
+            guessNumber = int(guessNumber)
+        except ValueError:
+            raise TypeError()
