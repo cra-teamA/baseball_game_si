@@ -36,3 +36,7 @@ def test_return_solved_result_if_unmatched_number(game):
 def test_return_solved_result_if_two_strike_one_ball(game):
     game.question = '123'
     assert_matched_number(game.guess("124"), False, 2, 0)
+
+def test_return_solved_result_if_one_strike_two_ball(game):
+    game.question = '123'
+    assert_matched_number(game.guess("321"), False, 1, 2)

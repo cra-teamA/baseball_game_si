@@ -15,6 +15,8 @@ class Game:
         for i in range(3):
             if guess_number[i] == self._question[i]:
                 game_result.strikes += 1
+            elif guess_number[i] in self._question:
+                game_result.balls += 1
 
         if game_result.strikes == 3:
             game_result.solved = True
